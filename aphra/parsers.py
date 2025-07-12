@@ -4,6 +4,7 @@ Module for parsing analysis and translation strings.
 
 import xml.etree.ElementTree as ET
 import logging
+import defusedxml.ElementTree
 
 def parse_analysis(analysis_str):
     """
@@ -20,7 +21,7 @@ def parse_analysis(analysis_str):
         analysis_content = analysis_str[analysis_start:analysis_end].strip()
 
         # Parse the analysis content using XML parser
-        root = ET.fromstring(f"<root>{analysis_content}</root>")
+        root = defusedxml.ElementTree.fromstring(f"<root>{analysis_content}</root>")
         items = []
 
         for item in root.findall('item'):
